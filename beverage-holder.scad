@@ -131,7 +131,7 @@ module clamp(inflate = 0) {
             cylinder(d=inflate+24, h=inflate+height, center=false);
             moveToStand() cylinder(d=inflate+25, h=inflate+height, center=false);
         }
-        rotate([0,0,10]) moveToStand() cylinder(d=inflate+25, h=inflate+height, center=false);
+        rotate([0,0,15]) moveToStand() cylinder(d=inflate+25, h=inflate+height, center=false);
     }
 }
 translate([0,0,holderHeight * 1]) rotate([180 * 1, 0, 0])
