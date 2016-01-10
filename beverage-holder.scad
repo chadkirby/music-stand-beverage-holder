@@ -83,7 +83,7 @@ module holder() {
             glassBottle();
             translate([0, -45, 200]) glassBottle();
         }
-        #translate([0, -standD/2 - 6, 0]) moveToStand() cylinder(d=4.75, h=holderHeight - 25, center=false);
+        #translate([0, -standD/2 - 6, 0]) moveToStand() cylinder(d=4.75, h=holderHeight, center=false);
 	}
 }
 holder();
