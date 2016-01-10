@@ -5,7 +5,7 @@ glassD1 = 60;
 glassD2 = 88;
 glassH = 135+13;
 standD = 24 + 2.5;
-holderHeight = 65;
+holderHeight = 50;
 wallThickness = 2.5;
 gap = 2;
 x=[65, 41, 24];
@@ -32,6 +32,17 @@ module limitZ(plus = 0) {
         children();
     }
 }
+module rotStand() {
+    translate([0, 5, 5]) rotate([10, 0, 0]) stand();
+}
+module standGap() {
+    hull() {
+        limitZ(-10) {
+            rotStand();
+            translate([50, -5, 0]) rotStand();
+        }
+    }
+}
 module standClamp() {
     cylinder(d=glassD2, h=holderHeight/2, center=false);
     limitZ()
@@ -52,12 +63,7 @@ module standClamp() {
             translate([0, -50, 0]) stand();
             translate([40, -50, 0]) stand();
         }
-        hull() {
-            limitZ(-10) {
-                translate([0, 5, 5]) rotate([10, 0, 0]) stand();
-                translate([50, 0, 5]) rotate([10, 0, 0]) stand();
-            }
-        }
+        standGap();
         translate([(holderHeight)*2 - (standD)/2, 0, 0]) moveToStand() cylinder(r1=(holderHeight)*2, r2=(holderHeight * 1.5), h=(holderHeight), center=false);
     }
 }
@@ -71,6 +77,8 @@ module holder() {
 	difference() {
 		standClamp();
 		translate([0, 0, 25]) stand();
+        rotStand();
+        translate([0, 0, holderHeight/2]) rotate([0, 90, 0]) cylinder(d=holderHeight/1.5, $fn=4, h=200, center=true);
         hull() {
             glassBottle();
             translate([0, -45, 200]) glassBottle();
