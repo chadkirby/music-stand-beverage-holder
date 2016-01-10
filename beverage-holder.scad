@@ -37,9 +37,9 @@ module rotStand() {
 }
 module standGap() {
     hull() {
-        limitZ(-10) {
-            #rotStand();
-            translate([50, -5, 0]) rotStand();
+        limitZ() {
+            rotStand();
+            translate([50, 0, 0]) rotStand();
         }
     }
 }
@@ -81,14 +81,47 @@ module holder() {
 	difference() {
 		standClamp();
 		translate([0, 0, 25]) stand();
+        standGap();
         rotStand();
         translate([0, 0, holderHeight/2]) rotate([0, 90, 0]) cylinder(d=holderHeight/1.5, $fn=4, h=200, center=true);
         hull() {
             glassBottle();
             translate([0, -45, 130]) glassBottle();
         }
-        translate([0, -standD/2 - 6, 0]) moveToStand() cylinder(d=4.75, h=holderHeight, center=false);
+        clampAxis();
+        clamp(0.5);
+        moveToClampOrigin() hull() {
+            cylinder(h=10.5, d=11, center=false);
+            translate([0, 10, 0]) cylinder(h=10.5, d=11, center=false);
+            translate([20, 0, 0]) cylinder(h=10.5, d=11, center=false);
+        }
 	}
 }
-rotate([180, 0, 0])
+module moveToClampOrigin() {
+    rotate([0,0,-25]) translate([0, -20, 0]) moveToStand() children();
+}
+module clampAxis(h=38, d=5) {
+    moveToClampOrigin() cylinder(d=d, h=h, center=false);
+}
+module clamp(inflate = 0) {
+    height = 10;
+    difference() {
+        hull() {
+            moveToStand() cylinder(d=inflate+29, h=inflate+height, center=false);
+            clampAxis(d=inflate+10, h=inflate+height);
+        }
+        hull() {
+            cylinder(d=inflate+25, h=inflate+height, center=false);
+            moveToStand() cylinder(d=inflate+25, h=inflate+height, center=false);
+        }
+        rotate([0,0,10]) moveToStand() cylinder(d=inflate+25, h=inflate+height, center=false);
+    }
+}
+translate([0,0,holderHeight]) rotate([180, 0, 0])
+{
     holder();
+}
+difference() {
+    clamp();
+    clampAxis();
+}
