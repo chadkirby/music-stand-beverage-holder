@@ -4,7 +4,7 @@ bottleD = 65;
 glassDBottom = 60;
 glassDTop = 88;
 glassH = 135+13;
-standD = 24 + 2.5;
+standD = 24 + 1.5;
 holderHeight = 50;
 wallThickness = 2.5;
 gap = 2;
@@ -128,7 +128,7 @@ module clamp(inflate = 0) {
             }
         }
         hull() {
-            cylinder(d=inflate+25, h=inflate+height, center=false);
+            cylinder(d=inflate+24, h=inflate+height, center=false);
             moveToStand() cylinder(d=inflate+25, h=inflate+height, center=false);
         }
         rotate([0,0,10]) moveToStand() cylinder(d=inflate+25, h=inflate+height, center=false);
