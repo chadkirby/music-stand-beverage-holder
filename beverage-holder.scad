@@ -111,7 +111,7 @@ module clamp(inflate = 0) {
     difference() {
         union() {
             difference() {
-                moveToStand() cylinder(d=inflate+29, h=inflate+height, center=false);
+                moveToStand() cylinder(d=inflate+30, h=inflate+height, center=false);
                 moveToStand() hull() {
                     translate([0, -10, 0]) cylinder(d=20, h=inflate+height, center=false);
                     translate([50, -10, 0])cylinder(d=20, h=inflate+height, center=false);
@@ -119,7 +119,7 @@ module clamp(inflate = 0) {
             }
             hull() {
                 clampAxis(d=inflate+10, h=inflate+height);
-                translate([-4, 22, 0]) clampAxis(d=inflate+2, h=inflate+height);
+                translate([-3, 22, 0]) clampAxis(d=inflate+3, h=inflate+height);
             }
             moveToStand() hull() {
                 cylinder(d=3+inflate, h=height+inflate, center=false);
@@ -131,7 +131,7 @@ module clamp(inflate = 0) {
             cylinder(d=inflate+24, h=inflate+height, center=false);
             moveToStand() cylinder(d=inflate+25, h=inflate+height, center=false);
         }
-        rotate([0,0,15]) moveToStand() cylinder(d=inflate+25, h=inflate+height, center=false);
+        translate([-10, -7, 0]) moveToStand() cylinder(d=inflate+25, h=inflate+height, center=false);
     }
 }
 translate([0,0,holderHeight * 1]) rotate([180 * 1, 0, 0])
