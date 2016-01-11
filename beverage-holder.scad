@@ -107,29 +107,24 @@ module clampAxis(h=50, d=4) {
     moveToClampOrigin() cylinder(d=d, h=h, center=false);
 }
 module clamp(inflate = 0) {
-    height = 10;
+    height = 12;
     difference() {
         union() {
-            difference() {
-                moveToStand() cylinder(d=inflate+31, h=inflate+height, center=false);
-                moveToStand() hull() {
-                    translate([0, -10, 0]) cylinder(d=20, h=inflate+height, center=false);
-                    translate([50, -10, 0])cylinder(d=20, h=inflate+height, center=false);
-                }
-            }
+            moveToStand() cylinder(d=inflate+32, h=inflate+height, center=false);
             hull() {
                 clampAxis(d=inflate+10, h=inflate+height);
-                translate([-3, 22, 0]) clampAxis(d=inflate+4, h=inflate+height);
+                translate([-2, 22, 0]) clampAxis(d=inflate+3, h=inflate+height);
             }
             moveToStand() hull() {
-                cylinder(d=3+inflate, h=height+inflate, center=false);
+                translate([0, standD/2 + 1.5, 0])
+					cylinder(d=3+inflate, h=height+inflate, center=false);
                 translate([0, standD/2 + 4, 0])
                     cylinder(d=3+inflate, h=height+inflate, center=false);
             }
         }
-        hull() {
+        moveToStand() rotate([0,0,-25]) hull() {
             cylinder(d=inflate+24, h=inflate+height, center=false);
-            moveToStand() cylinder(d=inflate+25, h=inflate+height, center=false);
+            translate([0, -20, 0]) cylinder(d=inflate+12, h=inflate+height, center=false);
         }
         translate([-12, -10, 0]) moveToStand() cylinder(d=inflate+25, h=inflate+height, center=false);
     }
@@ -137,7 +132,6 @@ module clamp(inflate = 0) {
 translate([0,0,holderHeight * 1]) rotate([180 * 1, 0, 0])
 difference() {
     holder();
-    clamp(0.5);
 	rotate([-20,0,0]) translate([0,0,-holderHeight/2-5]) cylinder(r=100, h=100, center=true);
 }
 translate([0,0,10 * 1]) rotate([0, 180 * 1, 0])
