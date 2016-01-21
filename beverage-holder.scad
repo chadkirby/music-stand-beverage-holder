@@ -57,14 +57,14 @@ module standClamp() {
                     translate([0, 4, 0]) cylinder(d=standD + 4, h=1, center=false);
                 }
             }
-            cylinder(d=standD + 10, h=holderHeight, center=false);
+            translate([-20,10,0]) cylinder(d=standD + 10, h=holderHeight, center=false);
 
         }
         hull() {
             stand();
-            translate([40, -15, 0]) stand();
-            translate([0, -50, 0]) stand();
-            translate([40, -50, 0]) stand();
+            translate([30, -17, 0]) stand();
+            *translate([0, -50, 0]) stand();
+            *translate([40, -50, 0]) stand();
         }
         //standGap();
         //translate([(holderHeight)*2 - (standD)/2, 0, 0]) moveToStand() cylinder(r1=(holderHeight)*2, r2=(holderHeight * 1.5), h=(holderHeight), center=false);
@@ -122,7 +122,7 @@ module clamp(inflate = 0) {
                     cylinder(d=4+inflate, h=height+inflate, center=false);
             }
         }
-        #moveToStand() hull() {
+        moveToStand() hull() {
             cylinder(d=inflate+24, h=inflate+height, center=false);
             translate([0, -20, 0]) cylinder(d=inflate+24, h=inflate+height, center=false);
         }
@@ -134,7 +134,7 @@ difference() {
     holder();
 	rotate([-20,0,0]) translate([0,0,-holderHeight/2-5]) cylinder(r=100, h=100, center=true);
 }
-translate([0,0,10 * 1]) rotate([0, 180 * 1, 0])
+translate([0,-55,10 * 1]) rotate([0, 180 * 1, 0])
 difference() {
     clamp();
     moveToClampOrigin() bolt();
